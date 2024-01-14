@@ -1,49 +1,57 @@
 # Pf_Project
-# Flappy Bird in C++
+# Flappy Bird in C
 
-This is a recreation of the popular mobile game Flappy Bird in C++. The game features ASCII graphics and simple gameplay mechanics, where the player controls a bird that must navigate through a series of pipes without colliding with them or the ground.
-
-## Prerequisites
-
-To run this game, you will need a C++ compiler and a Windows operating system.
+This is a recreation of the popular mobile game Flappy Bird in C programming language. The game is a side-scroller where the player controls a bird, attempting to fly between pipes without hitting them or the ground. The game is challenging and requires quick reflexes and good timing.
 
 ## Code Overview
 
-The code is organized into several functions, each responsible for a specific aspect of the game.
+The code is organized into several functions, each responsible for a specific aspect of the game. The main function initializes the game, loads the high score, and displays the main menu. The game function handles the actual gameplay, including the bird's movement, pipe generation, and collision detection. The screen function displays the game screen, including the bird, pipes, and score. The pipes function generates and moves the pipes. The bird function controls the bird's movement and animation. The checkscore function checks if the bird has passed through a pipe and increments the score accordingly. The gameover function checks for collisions and ends the game if necessary. The endgame function displays the game over screen and the player's score. The menu function displays the main menu and handles user input. The credits function displays the game credits. The help function displays the game help screen.
 
-### `main` Function
+## Code Explanation
 
-The `main` function is the entry point of the program. It initializes the game, loads the high score from a file, and displays the main menu. The user can choose to play the game, view the help screen, view the credits, or quit the game.
+### Main Function
 
-### `game` Function
+```c
+int main()
+{
+    // Initialize the game
+    srand((unsigned int)time(NULL));
 
-The `game` function is the main game loop. It initializes the game screen, sets up the bird and pipes, and handles user input. The game loop continues until the bird collides with a pipe or the ground, or the user quits the game.
+    // Load the high score
+    inp = fopen("/Program Files/FlappyBird/options.txt", "r");
+    if (inp != NULL)
+    {
+        fscanf(inp, "%d", &highscore);
+        fclose(inp);
+        err = 0;
+    }
+    else
+    {
+        highscore = 0;
+        err = 1;
+    }
 
-### `screen` Function
+    // Initialize the game loop
+    int a = 0;
+    char sl;
+    while (1)
+    {
+        // Display the main menu
+        if (a == 0)
+            goto play;
+        if (a > 0)
+        {
+            score = 0;
+            printf("Do you want to play again? [y/n] ");
+            scanf(" %c", &sl);
+            if (sl == 'n')
+                goto quit;
+            else
+                goto play;
+        }
 
-The `screen` function displays the current state of the game to the console. It draws the game screen, the bird, the pipes, and the score.
-
-### `pipes` Function
-
-The `pipes` function generates and moves the pipes. It randomly generates the position of the pipes and moves them towards the left side of the screen. If a pipe moves off the screen, it is removed and a new pipe is generated.
-
-### `bird` Function
-
-The `bird` function controls the movement of the bird. It handles user input and moves the bird up or down accordingly. The bird can only move up a certain distance before it starts falling due to gravity.
-
-### `checkscore` Function
-
-The `checkscore` function checks if the bird has passed through a pipe. If the bird passes through a pipe, the score is incremented.
-
-### `gameover` Function
-
-The `gameover` function checks if the bird has collided with a pipe or the ground. If the bird collides with an obstacle, the game ends and the final score is displayed.
-
-### `endgame` Function
-
-The `endgame` function displays the game over screen and the final score. It also allows the user to return to the main menu.
-
-### `menu` Function
-
-The `menu` function displays the main menu of the game. The user can choose to play the game
-
+    play:
+        menu();
+        scanf(" %c", &sl);
+        switch (sl)
+        
